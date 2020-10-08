@@ -1,0 +1,76 @@
+//AUTHOR: Spenser Dooley
+//COURSE: CPT 187
+//PURPOSE: WriteOrder takes current order information and tries to write it to the master file.
+//CREATED: 30 September 2020
+
+package edu.cpt187.dooley.exercise6;
+
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WriteOrder 
+{//START OF CLASS WriteOrder
+
+	//ATTRIBUTES
+	private boolean fileFoundFlag = false;
+	private String masterFileName = "";
+	private int recordCount = 0;
+
+	//WriteOrder Constructor
+	public WriteOrder(String borrowedFileName) 
+	{//START OF CONSTRUCTOR
+		masterFileName = borrowedFileName;
+	}//END OF CONSTRUCTOR
+
+	//SETTER METHODS
+
+	public void setWriteOrder(int borrowedItemID, String borrowedItemName, double borrowedItemPrice, int borrowedQuantity, double borrowedOrderCost) 
+	{//START OF setWriteOrder
+
+		try 
+		{//START OF try
+
+			PrintWriter filePW = new PrintWriter(new FileWriter(masterFileName, false)); 
+
+			filePW.printf("%n%d\t%s\t%f\t%d\t%f", borrowedItemID, borrowedItemName, borrowedItemPrice, borrowedQuantity, borrowedOrderCost);
+			
+			recordCount++; //???
+			
+			fileFoundFlag = true;
+			
+			filePW.close();
+
+		}//END OF try
+
+		catch(IOException ex) 
+		{//START OF catch
+
+			fileFoundFlag = false;
+
+		}//END OF catch
+
+	}//END OF setWriteOrder
+
+	//END OF SETTERS
+
+	//GETTER METHODS
+
+	public boolean getFileFoundFlag() 
+	{//START OF getFileFoundFlag
+		return fileFoundFlag;
+	}//END OF getFileFoundFlag
+
+	public String getFileName() 
+	{//START OF getFileName
+		return masterFileName;
+	}//END OF getFileName
+
+	public int getRecordCount() 
+	{//START OF getRecordCount
+		return recordCount;
+	}//END OF getRecordCount
+
+	//END OF GETTERS
+	
+}//END OF CLASS WriteOrder
